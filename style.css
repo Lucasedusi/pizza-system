@@ -13,6 +13,11 @@ body {
   display: none;
 }
 
+.title {
+  font-family: 'Hepta Slab', Helvetica, Arial;
+  color: #fff !important;
+}
+
 header {
   position: fixed;
   left: 0;
@@ -68,7 +73,7 @@ main {
 
 h1 {
   font-family: 'Hepta Slab', Helvetica, Arial;
-  color: #fff;
+  /* color: #fff; */
 }
 .pizza-area {
   display: grid;
@@ -88,6 +93,7 @@ h1 {
 }
 .pizza-item--img {
   width: 200px;
+  pointer-events: none;
   height: 200px;
   background-color: #eee;
   border-radius: 100px;
@@ -99,6 +105,7 @@ h1 {
 }
 .pizza-item--add {
   width: 50px;
+  pointer-events: none;
   height: 50px;
   line-height: 50px;
   border-radius: 25px;
@@ -136,13 +143,20 @@ h1 {
   top: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.5);
-  display: none;
-  transition: all ease 0.5s;
+  background-color: #fff8;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  transition: opacity .6s;
   justify-content: center;
   align-items: center;
   overflow-y: auto;
 }
+.pizzaWindowArea.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 .pizzaWindowBody {
   width: 900px;
   background-color: #fff;
