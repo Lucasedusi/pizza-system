@@ -33,16 +33,26 @@ pizzaJson.map((item, index) => {
       }
     });
 
+    // Método Mais pizza
     const maisPizza = () => {
       pizzaQtd++;
       getElement('.pizzaInfo--qt').innerHTML = pizzaQtd;
     };
 
+    // Método Menos pizza
     const menosPizza = () => {
-      pizzaQtd--;
-      getElement('.pizzaInfo--qt').innerHTML = pizzaQtd;
+      if (pizzaQtd > 1) {
+        pizzaQtd--;
+        getElement('.pizzaInfo--qt').innerHTML = pizzaQtd;
+      }
     };
 
+    getElements('.pizzaInfo--size').forEach((size, sizeIndex) => {
+      size.addEventListener('click', () => {
+        getElement('.pizzaInfo--size.selected').classList.remove('selected');
+        size.classList.add('selected');
+      });
+    });
     getElement('.pizzaInfo--qtmenos').addEventListener('click', menosPizza);
     getElement('.pizzaInfo--qtmais').addEventListener('click', maisPizza);
 
