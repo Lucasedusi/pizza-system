@@ -84,8 +84,14 @@ pizzaJson.map((item, index) => {
       getElement('aside').classList.add('show');
       getElement('.cart').innerHTML = '';
 
+      let subtotal = 0;
+      let total = 0;
+      let desconto = 0;
+
       for (let i in cart) {
         let pizzaItem = pizzaJson.find((item) => item.id == cart[i].id);
+        subtotal += pizzaItem.price * cart[i].qt;
+
         let cartItem = getElement('.models .cart--item').cloneNode('true');
 
         let pizzaSizeName;
@@ -108,9 +114,28 @@ pizzaJson.map((item, index) => {
         cartItem.querySelector('img').src = pizzaItem.img;
         cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
         cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qt;
+        cartItem.querySelector('.cart--item-qtmenos').addEventListener('click', () => {
+          if (cart[i].qt > 1) {
+            cart[i].qt--;
+          } else {
+            cart.slice(i, 1);
+          }
+          updateModal();
+        });
+        cartItem.querySelector('.cart--item-qtmais').addEventListener('click', () => {
+          cart[i].qt++;
+          updateModal();
+        });
 
         getElement('.cart').append(cartItem);
       }
+
+      desconto = subtotal * 0.1;
+      total = subtotal - desconto;
+
+      getElement('.subtotal span:last-child').innerHTML = `${subtotal.toFixed(2)}`;
+      getElement('.desconto span:last-child').innerHTML = `${desconto.toFixed(2)}`;
+      getElement('.total span:last-child').innerHTML = `${total.toFixed(2)}`;
     } else {
       getElement('aside').classList.remove('show');
     }
